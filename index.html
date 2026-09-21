@@ -4066,7 +4066,10 @@ function showRedeemResult(
    開啟相機
 ========================================================= */
 
-function startScanner() {
+  let scannerRunning = false;
+  let html5QrCode = null;
+  
+  function startScanner() {
 
   if (
     scannerRunning
