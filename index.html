@@ -3506,211 +3506,49 @@ function getStaffToken() {
    登入
 ========================================================= */
 
-async function login() {
+function login(){
 
   const pin =
     document
-      .getElementById(
-        "pin"
-      )
-      .value
-      .trim();
+    .getElementById("pin")
+    .value;
 
 
-  const message =
-    document
-      .getElementById(
-        "loginMessage"
-      );
+  fetch(
+    "https://xilitravel-coupon.xilitravel.workers.dev/?action=stafflogin&pin="
+    + pin
+    + "&prefix=testLogin"
+  )
+
+  .then(
+    response => response.json()
+  )
+
+  .then(
+    result => {
+
+      if(result.success){
+
+        document
+        .getElementById("loginBox")
+        .style.display="none";
 
 
-  if (!pin) {
+        document
+        .getElementById("dashboard")
+        .style.display="block";
 
-    message.className =
-      "result-box error";
+      }
 
-    message.style.display =
-      "block";
+      else{
 
-    message.innerHTML =
-      "❌ 請輸入工作人員 PIN";
+        alert("登入失敗");
 
-    return;
-
-  }
-
-
-  message.className =
-    "result-box";
-
-  message.style.display =
-    "block";
-
-  message.innerHTML =
-    "⏳ 驗證中...";
-
-
-  try {
-
-    const result =
-      await callApi(
-        "stafflogin",
-        {
-          pin: pin
-        }
-      );
-
-
-    if (
-      result &&
-      result.success &&
-      result.token
-    ) {
-
-      sessionStorage.setItem(
-        TOKEN_KEY,
-        result.token
-      );
-
-
-      document
-        .getElementById(
-          "loginBox"
-        )
-        .style
-        .display =
-          "none";
-
-
-      document
-        .getElementById(
-          "dashboard"
-        )
-        .style
-        .display =
-          "block";
-
-
-      document
-        .getElementById(
-          "pin"
-        )
-        .value =
-          "";
-
-
-      message.style.display =
-        "none";
+      }
 
     }
 
-    else {
-
-      message.className =
-        "result-box error";
-
-      message.style.display =
-        "block";
-
-      message.innerHTML =
-        "❌ " +
-        (
-          result &&
-          result.message
-            ? result.message
-            : "PIN 驗證失敗"
-        );
-
-    }
-
-  }
-
-  catch(error) {
-
-    message.className =
-      "result-box error";
-
-    message.style.display =
-      "block";
-
-    message.innerHTML =
-      "❌ " +
-      error.message;
-
-  }
-
-}
-
-
-/* =========================================================
-   Token 失效處理
-========================================================= */
-
-function handleTokenExpired(
-  message
-) {
-
-  sessionStorage.removeItem(
-    TOKEN_KEY
   );
-
-
-  if (
-    html5QrCode &&
-    scannerRunning
-  ) {
-
-    stopScanner();
-
-  }
-
-
-  document
-    .getElementById(
-      "dashboard"
-    )
-    .style
-    .display =
-      "none";
-
-
-  document
-    .getElementById(
-      "loginBox"
-    )
-    .style
-    .display =
-      "block";
-
-
-  const loginMessage =
-    document
-      .getElementById(
-        "loginMessage"
-      );
-
-
-  loginMessage.className =
-    "result-box error";
-
-
-  loginMessage.style.display =
-    "block";
-
-
-  loginMessage.innerHTML =
-    "❌ " +
-    (
-      message ||
-      "登入已逾時，請重新登入。"
-    );
-
-
-  document
-    .getElementById(
-      "pin"
-    )
-    .focus();
 
 }
 
