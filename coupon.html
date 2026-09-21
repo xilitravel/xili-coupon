@@ -1560,6 +1560,55 @@ function loadCoupon() {
   let finished = false;
 
 
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  /*
+   * 先建立 timeout
+   * 一定要在 appendChild 前完成
+   */
+  const timeoutId =
+    setTimeout(
+      function() {
+
+        if (finished) {
+          return;
+        }
+
+        finished = true;
+
+
+        delete window[
+          callbackName
+        ];
+
+
+        showError(
+          "優惠券載入逾時，請稍後再試"
+        );
+
+
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+
+      },
+      30000
+    );
+
+
+  /*
+   * JSONP callback
+   */
   window[callbackName] =
     function(result) {
 
@@ -1598,17 +1647,26 @@ function loadCoupon() {
           result.data
         );
 
+
       } catch (error) {
+
+        console.error(
+          "優惠券資料處理錯誤：",
+          error
+        );
+
 
         showError(
           "優惠券資料處理失敗"
         );
+
 
       } finally {
 
         delete window[
           callbackName
         ];
+
 
         if (
           script &&
@@ -1626,12 +1684,9 @@ function loadCoupon() {
     };
 
 
-  const script =
-    document.createElement(
-      "script"
-    );
-
-
+  /*
+   * API 網址
+   */
   const requestUrl =
     API_URL +
     "?action=getcoupon" +
@@ -1652,6 +1707,9 @@ function loadCoupon() {
   script.async = true;
 
 
+  /*
+   * API 連線錯誤
+   */
   script.onerror =
     function() {
 
@@ -1661,17 +1719,21 @@ function loadCoupon() {
 
       finished = true;
 
+
       clearTimeout(
         timeoutId
       );
+
 
       delete window[
         callbackName
       ];
 
+
       showError(
         "優惠券連線失敗，請稍後再試"
       );
+
 
       if (
         script.parentNode
@@ -1686,43 +1748,13 @@ function loadCoupon() {
     };
 
 
+  /*
+   * 最後才加入 script
+   */
   document
     .head
     .appendChild(
       script
-    );
-
-
-  const timeoutId =
-    setTimeout(
-      function() {
-
-        if (finished) {
-          return;
-        }
-
-        finished = true;
-
-        delete window[
-          callbackName
-        ];
-
-        showError(
-          "優惠券載入逾時，請稍後再試"
-        );
-
-        if (
-          script.parentNode
-        ) {
-
-          script.parentNode.removeChild(
-            script
-          );
-
-        }
-
-      },
-      30000
     );
 
 }
@@ -2461,6 +2493,10 @@ function renderCoupon(data) {
   </footer>
 
 
+
+  loadCoupon();
+
+</script>
 
 </body>
 
