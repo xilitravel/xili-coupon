@@ -3304,7 +3304,7 @@ button:active {
 ========================================================= */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbxGhqRLCqZRaJIhopbyIdC9L2_bMyRoJizIzkZ2I4lzZ48gG1C_JXQS97cG_5y25lhEMA/exec";
+  "https://xilitravel-coupon.xilitravel.workers.dev/";
 
 
 const TOKEN_KEY =
@@ -3530,6 +3530,11 @@ function login(){
 
       if(result.success){
 
+        sessionStorage.setItem(
+    TOKEN_KEY,
+    result.token
+  );
+        
         document
         .getElementById("loginBox")
         .style.display="none";
