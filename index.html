@@ -4065,9 +4065,12 @@ function showRedeemResult(
 
 
   box.innerHTML =
-    message;
-
-}
+  message ||
+  (
+    success
+      ? "✅ 核銷成功！優惠券已使用"
+      : "❌ 核銷失敗"
+  );
 
 
 /* =========================================================
