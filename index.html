@@ -4298,39 +4298,32 @@ if(success === true){
 
   )
 
-  .catch(         
+ .catch(
 
-      error => {
+  error => {
 
-        scannerRunning =
-          false;
-
-
-        if (
-          html5QrCode
-        ) {
-
-          try {
-
-            html5QrCode.clear();
-
-          }
-
-          catch(e) {}
-
-        }
+    scannerRunning = false;
 
 
-        showRedeemResult(
+    if(html5QrCode){
 
-          false,
+      try{
 
-          "❌ 無法開啟相機：" +
-          error.message
-
-        );
+        html5QrCode.clear();
 
       }
+
+      catch(e){}
+
+    }
+
+
+    showRedeemResult(
+      false,
+      "❌ 無法開啟相機：" + error.message
+    );
+
+  }
     
 /* =========================================================
    停止相機
