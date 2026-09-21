@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 
 <head>
 
@@ -9,6 +9,8 @@
     name="viewport"
     content="width=device-width, initial-scale=1"
   >
+
+  <!-- Google Fonts -->
 
   <link
     rel="preconnect"
@@ -26,1199 +28,1452 @@
     rel="stylesheet"
   >
 
-<style>
+  <style>
+
+    /* =========================================
+       全域
+    ========================================= */
 
-*{
-  box-sizing:border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-html{
-  scroll-behavior:smooth;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-body{
+    body {
+      margin: 0;
 
-  margin:0;
+      font-family:
+        "Noto Sans TC",
+        sans-serif;
 
-  font-family:
-    "Noto Sans TC",
-    sans-serif;
+      color: #5f4b55;
 
-  color:#5f4b55;
+      overflow-x: hidden;
 
-  overflow-x:hidden;
+      /* 粉紅天空背景 */
 
-  background:
+      background:
 
-    radial-gradient(
-      circle at 12% 5%,
-      rgba(255,170,195,.65),
-      transparent 24%
-    ),
+        radial-gradient(
+          circle at 12% 5%,
+          rgba(255,170,195,.65),
+          transparent 24%
+        ),
 
-    radial-gradient(
-      circle at 85% 8%,
-      rgba(255,210,220,.8),
-      transparent 28%
-    ),
+        radial-gradient(
+          circle at 85% 8%,
+          rgba(255,210,220,.8),
+          transparent 28%
+        ),
 
-    radial-gradient(
-      circle at 50% 45%,
-      rgba(255,255,255,.75),
-      transparent 38%
-    ),
+        radial-gradient(
+          circle at 50% 45%,
+          rgba(255,255,255,.75),
+          transparent 38%
+        ),
 
-    radial-gradient(
-      circle at 20% 70%,
-      rgba(255,190,210,.45),
-      transparent 30%
-    ),
+        radial-gradient(
+          circle at 20% 70%,
+          rgba(255,190,210,.45),
+          transparent 30%
+        ),
 
-    linear-gradient(
-      180deg,
-      #f9d9df 0%,
-      #fce4e8 25%,
-      #fff5f4 55%,
-      #f8dfe5 100%
-    );
+        linear-gradient(
+          180deg,
+          #f9d9df 0%,
+          #fce4e8 25%,
+          #fff5f4 55%,
+          #f8dfe5 100%
+        );
+    }
 
-}
 
-.bg-flower{
+    /* =========================================
+       背景裝飾
+    ========================================= */
 
-  position:fixed;
+    .bg-flower {
+      position: fixed;
 
-  z-index:0;
+      z-index: 0;
 
-  font-size:55px;
+      font-size: 55px;
 
-  opacity:.16;
+      opacity: .16;
 
-  pointer-events:none;
+      pointer-events: none;
+    }
 
-}
+    .flower-1 {
+      left: 2%;
+      top: 18%;
+      transform: rotate(-25deg);
+    }
 
-.flower-1{
+    .flower-2 {
+      right: 4%;
+      top: 12%;
+      transform: rotate(30deg);
+    }
 
-  left:2%;
+    .flower-3 {
+      left: 3%;
+      bottom: 18%;
+      transform: rotate(-15deg);
+    }
 
-  top:18%;
+    .flower-4 {
+      right: 5%;
+      bottom: 24%;
+      transform: rotate(20deg);
+    }
 
-  transform:rotate(-25deg);
 
-}
+    /* =========================================
+       主容器
+    ========================================= */
 
-.flower-2{
+    .page {
+      position: relative;
 
-  right:4%;
+      z-index: 2;
 
-  top:12%;
+      width: 100%;
 
-  transform:rotate(30deg);
+      max-width: 1024px;
 
-}
+      margin: 0 auto;
 
-.flower-3{
+      padding:
+        14px
+        60px
+        0;
+    }
 
-  left:3%;
 
-  bottom:18%;
+    /* =========================================
+       Header
+    ========================================= */
 
-  transform:rotate(-15deg);
+    .header {
+      position: relative;
 
-}
+      height: 135px;
 
-.flower-4{
+      margin-bottom: 18px;
 
-  right:5%;
+      border-radius: 28px;
 
-  bottom:24%;
+      display: flex;
 
-  transform:rotate(20deg);
+      align-items: center;
 
-}
+      justify-content: center;
 
-.page{
+      background:
 
-  position:relative;
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.9),
+          rgba(255,240,243,.8)
+        );
 
-  z-index:2;
+      border:
+        1px solid
+        rgba(255,255,255,.9);
 
-  width:100%;
+      box-shadow:
 
-  max-width:1024px;
+        0 18px 45px
+        rgba(220,110,145,.12);
+    }
 
-  margin:0 auto;
+    .header-flower {
+      position: absolute;
+      font-size: 55px;
+    }
 
-  padding:14px 60px 0;
+    .header-flower.left {
+      left: 130px;
+    }
 
-}
+    .header-flower.right {
+      right: 130px;
+    }
 
-.header{
+    .brand-box {
+      position: relative;
 
-  position:relative;
+      width: 375px;
 
-  height:135px;
+      height: 82px;
 
-  margin-bottom:18px;
+      border-radius: 20px;
 
-  border-radius:28px;
+      display: flex;
 
-  display:flex;
+      align-items: center;
 
-  align-items:center;
+      justify-content: center;
 
-  justify-content:center;
+      background:
 
-  background:
+        linear-gradient(
+          135deg,
+          #d77894,
+          #bc536f
+        );
 
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.9),
-      rgba(255,240,243,.8)
-    );
+      box-shadow:
 
-  border:
-    1px solid
-    rgba(255,255,255,.9);
+        0 12px 22px
+        rgba(180,70,110,.25);
+    }
 
-  box-shadow:
+    .brand {
+      color: white;
 
-    0 18px 45px
-    rgba(220,110,145,.12);
+      font-size: 42px;
 
-}
+      font-weight: 900;
 
-.header-flower{
+      letter-spacing: 16px;
 
-  position:absolute;
+      padding-left: 16px;
+    }
 
-  font-size:55px;
+    /* 副標題 */
 
-}
+    .brand-sub {
+      position: absolute;
 
-.header-flower.left{
+      top: 110px;
 
-  left:130px;
+      width: 100%;
 
-}
+      text-align: center;
 
-.header-flower.right{
+      color: #8e5d6b;
 
-  right:130px;
+      font-size: 17px;
 
-}
+      letter-spacing: 6px;
 
-.brand-box{
+      font-weight: 600;
+    }
 
-  width:375px;
+    .brand-sub span {
+      margin: 0 10px;
+    }
 
-  height:82px;
+    .header-script {
+      position: absolute;
 
-  border-radius:20px;
+      right: 25px;
 
-  display:flex;
+      top: 25px;
 
-  align-items:center;
+      color: #c98a9d;
 
-  justify-content:center;
+      font-family:
+        "Dancing Script",
+        cursive;
 
-  background:
+      font-size: 25px;
 
-    linear-gradient(
-      135deg,
-      #d77894,
-      #bc536f
-    );
+      line-height: 1.25;
 
-  box-shadow:
+      transform: rotate(-8deg);
 
-    0 12px 22px
-    rgba(180,70,110,.25);
+      text-align: center;
+    }
 
-}
 
-.brand{
+    /* =========================================
+       優惠券
+    ========================================= */
 
-  color:white;
+    .coupon-card {
+      position: relative;
 
-  font-size:42px;
+      overflow: hidden;
 
-  font-weight:900;
+      min-height: 440px;
 
-  letter-spacing:16px;
+      border-radius: 30px;
 
-  padding-left:16px;
+      margin-bottom: 20px;
 
-}
+      padding: 34px 30px 25px;
 
-.brand-sub{
+      background:
 
-  position:absolute;
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.93),
+          rgba(255,249,250,.88)
+        );
 
-  top:110px;
+      border:
+        1px solid
+        rgba(255,255,255,.9);
 
-  width:100%;
+      box-shadow:
 
-  text-align:center;
+        0 20px 45px
+        rgba(213,110,145,.15);
+    }
 
-  color:#8e5d6b;
+    .coupon-inner {
+      display: grid;
 
-  font-size:17px;
+      grid-template-columns:
+        1.15fr
+        .85fr;
 
-  letter-spacing:6px;
+      gap: 25px;
 
-  font-weight:600;
+      min-height: 360px;
+    }
 
-}
 
-.brand-sub span{
+    /* =========================================
+       左邊
+    ========================================= */
 
-  margin:0 10px;
+    .coupon-left {
+      position: relative;
 
-}
+      padding:
+        0
+        20px
+        0
+        0;
+    }
 
-.header-script{
+    .status {
+      display: inline-flex;
 
-  position:absolute;
+      align-items: center;
 
-  right:25px;
+      gap: 8px;
 
-  top:25px;
+      padding:
+        11px
+        24px;
 
-  color:#c98a9d;
+      border-radius: 40px;
 
-  font-family:
-    "Dancing Script",
-    cursive;
+      background:
 
-  font-size:25px;
+        linear-gradient(
+          135deg,
+          #eef7ec,
+          #dcebdd
+        );
 
-  line-height:1.25;
+      color: #4d805a;
 
-  transform:rotate(-8deg);
+      font-size: 22px;
 
-  text-align:center;
+      font-weight: 800;
+    }
 
-}
+    .status.used {
+      background: #f3d9df;
+      color: #a64961;
+    }
 
-.coupon-card{
+    .status.expired {
+      background: #eee6e6;
+      color: #8b7777;
+    }
 
-  position:relative;
+    .discount-title {
+      margin-top: 38px;
 
-  overflow:hidden;
+      text-align: center;
 
-  min-height:440px;
+      color: #8d5365;
 
-  border-radius:30px;
+      font-size: 25px;
 
-  margin-bottom:20px;
+      font-weight: 700;
 
-  padding:34px 30px 25px;
+      letter-spacing: 3px;
+    }
 
-  background:
+    .discount {
+      position: relative;
 
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.93),
-      rgba(255,249,250,.88)
-    );
+      text-align: center;
 
-  border:
+      margin-top: -2px;
 
-    1px solid
-    rgba(255,255,255,.9);
+      color: #b23f60;
 
-  box-shadow:
+      font-size: 125px;
 
-    0 20px 45px
-    rgba(213,110,145,.15);
+      line-height: 1;
 
-}
+      font-weight: 900;
 
-.coupon-inner{
+      letter-spacing: 2px;
 
-  display:grid;
+      text-shadow:
 
-  grid-template-columns:
-    1.15fr
-    .85fr;
+        0 10px 15px
+        rgba(180,70,110,.12);
+    }
 
-  gap:25px;
+    .heart-doodle {
+      position: absolute;
 
-  min-height:360px;
+      right: 8px;
 
-}
+      top: 105px;
 
-.coupon-left{
+      font-size: 80px;
 
-  position:relative;
+      color: #efb3c3;
 
-  padding:0 20px 0 0;
+      font-family: cursive;
 
-}
+      font-weight: 300;
+    }
 
-.status{
+    .left-travel-text {
+      position: absolute;
 
-  display:inline-flex;
+      left: -3px;
 
-  align-items:center;
+      top: 135px;
 
-  gap:8px;
+      color: #db8ea3;
 
-  padding:11px 24px;
+      font-size: 16px;
 
-  border-radius:40px;
+      line-height: 1.6;
 
-  background:
+      transform: rotate(-8deg);
 
-    linear-gradient(
-      135deg,
-      #eef7ec,
-      #dcebdd
-    );
+      text-align: center;
+    }
 
-  color:#4d805a;
+    .info-box {
+      margin-top: 15px;
 
-  font-size:22px;
+      border-radius: 20px;
 
-  font-weight:800;
+      overflow: hidden;
 
-}
+      border:
+        1px solid
+        #efc5cf;
 
-.status.used{
+      background:
+        rgba(255,255,255,.5);
+    }
 
-  background:#f3d9df;
+    .info-row {
+      display: grid;
 
-  color:#a64961;
+      grid-template-columns:
+        42px
+        135px
+        1fr;
 
-}
+      align-items: center;
 
-.status.expired{
+      min-height: 50px;
 
-  background:#eee6e6;
+      padding:
+        0
+        18px;
 
-  color:#8b7777;
+      border-bottom:
+        1px solid
+        #efd5da;
+    }
 
-}
+    .info-row:last-child {
+      border-bottom: none;
+    }
 
-.discount-title{
+    .info-icon {
+      font-size: 22px;
+    }
 
-  margin-top:38px;
+    .info-label {
+      font-size: 17px;
 
-  text-align:center;
+      font-weight: 600;
 
-  color:#8d5365;
+      color: #715661;
+    }
 
-  font-size:25px;
+    .info-value {
+      font-size: 18px;
 
-  font-weight:700;
+      font-weight: 700;
 
-  letter-spacing:3px;
+      color: #865363;
+    }
 
-}
+    .travel-message {
+      margin-top: 18px;
 
-.discount{
+      text-align: center;
 
-  text-align:center;
+      color: #cf758d;
 
-  margin-top:-2px;
+      font-size: 20px;
 
-  color:#b23f60;
+      line-height: 1.55;
 
-  font-size:125px;
+      font-weight: 600;
+    }
 
-  line-height:1;
 
-  font-weight:900;
+    /* =========================================
+       中間虛線
+    ========================================= */
 
-}
+    .coupon-divider {
+      position: absolute;
 
-.heart-doodle{
+      left: 58%;
 
-  position:absolute;
+      top: 35px;
 
-  right:8px;
+      bottom: 25px;
 
-  top:105px;
+      border-left:
+        2px dashed
+        rgba(230,155,175,.5);
+    }
 
-  font-size:80px;
 
-  color:#efb3c3;
+    /* =========================================
+       右邊
+    ========================================= */
 
-}
+    .coupon-right {
+      display: flex;
 
-.info-box{
+      flex-direction: column;
 
-  margin-top:15px;
+      align-items: center;
 
-  border-radius:20px;
+      justify-content: center;
 
-  overflow:hidden;
+      padding-left: 20px;
+    }
 
-  border:
-    1px solid
-    #efc5cf;
+    .qr-title {
+      width: 100%;
 
-  background:
-    rgba(255,255,255,.5);
+      max-width: 255px;
 
-}
+      padding:
+        15px
+        18px;
 
-.info-row{
+      margin-bottom: 12px;
 
-  display:grid;
+      border-radius: 22px;
 
-  grid-template-columns:
-    42px
-    135px
-    1fr;
+      text-align: center;
 
-  align-items:center;
+      color: #7f5360;
 
-  min-height:50px;
+      font-size: 20px;
 
-  padding:0 18px;
+      font-weight: 700;
 
-  border-bottom:
-    1px solid
-    #efd5da;
+      line-height: 1.55;
 
-}
+      background:
 
-.info-row:last-child{
+        linear-gradient(
+          135deg,
+          #f8e6ea,
+          #f2dfe4
+        );
+    }
 
-  border-bottom:none;
+    .qr-box {
+      width: 255px;
 
-}
+      height: 255px;
 
-.info-icon{
+      display: flex;
 
-  font-size:22px;
+      align-items: center;
 
-}
+      justify-content: center;
 
-.info-label{
+      border-radius: 20px;
 
-  font-size:17px;
+      background: white;
 
-  font-weight:600;
+      border:
+        3px solid
+        #eab6c4;
 
-  color:#715661;
+      box-shadow:
 
-}
+        0 10px 25px
+        rgba(210,100,135,.12);
+    }
 
-.info-value{
+    .qr-box img {
+      width: 215px;
 
-  font-size:18px;
+      height: 215px;
 
-  font-weight:700;
+      object-fit: contain;
+    }
 
-  color:#865363;
+    .travel-button {
+      margin-top: 14px;
 
-  word-break:break-all;
+      padding:
+        10px
+        36px;
 
-}
+      border-radius: 50px;
 
-.travel-message{
+      background:
 
-  margin-top:18px;
+        linear-gradient(
+          135deg,
+          #d97893,
+          #bd5874
+        );
 
-  text-align:center;
+      color: white;
 
-  color:#cf758d;
+      font-size: 19px;
 
-  font-size:20px;
+      font-weight: 800;
 
-  line-height:1.55;
+      box-shadow:
 
-  font-weight:600;
+        0 8px 18px
+        rgba(190,80,115,.18);
+    }
 
-}
+    .travel-en {
+      margin-top: 10px;
 
-.coupon-divider{
+      color: #916371;
 
-  position:absolute;
+      font-size: 15px;
 
-  left:58%;
+      letter-spacing: 1px;
+    }
 
-  top:35px;
 
-  bottom:25px;
+    /* =========================================
+       Section 共用
+    ========================================= */
 
-  border-left:
-    2px dashed
-    rgba(230,155,175,.5);
+    .section-card {
+      position: relative;
 
-}
+      overflow: hidden;
 
-.coupon-right{
+      border-radius: 28px;
 
-  display:flex;
+      margin-bottom: 20px;
 
-  flex-direction:column;
+      padding:
+        20px
+        30px
+        14px;
 
-  align-items:center;
+      background:
 
-  justify-content:center;
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.93),
+          rgba(255,250,251,.86)
+        );
 
-  padding-left:20px;
+      border:
+        1px solid
+        rgba(255,255,255,.9);
 
-}
+      box-shadow:
 
-.qr-title{
+        0 15px 38px
+        rgba(210,110,145,.11);
+    }
 
-  width:100%;
+    .section-header {
+      display: flex;
 
-  max-width:255px;
+      align-items: center;
 
-  padding:15px 18px;
+      gap: 10px;
 
-  margin-bottom:12px;
+      margin-bottom: 10px;
+    }
 
-  border-radius:22px;
+    .section-title {
+      color: #8c3f57;
 
-  text-align:center;
+      font-size: 32px;
 
-  color:#7f5360;
+      font-weight: 900;
 
-  font-size:20px;
+      white-space: nowrap;
+    }
 
-  font-weight:700;
+    .section-line {
+      flex: 1;
 
-  background:
+      height: 2px;
 
-    linear-gradient(
-      135deg,
-      #f8e6ea,
-      #f2dfe4
-    );
+      margin-top: 7px;
 
-}
+      background:
 
-.qr-box{
+        linear-gradient(
+          90deg,
+          #d98ca1,
+          rgba(217,140,161,.25)
+        );
+    }
 
-  width:255px;
+    .section-en {
+      margin-left: 12px;
 
-  height:255px;
+      color: #d28a9e;
 
-  display:flex;
+      font-family:
+        "Dancing Script",
+        cursive;
 
-  align-items:center;
+      font-size: 20px;
 
-  justify-content:center;
+      white-space: nowrap;
+    }
 
-  border-radius:20px;
 
-  background:white;
+    /* =========================================
+       說明列表
+    ========================================= */
 
-  border:
-    3px solid
-    #eab6c4;
+    .rule-row {
+      display: grid;
 
-}
+      grid-template-columns:
+        42px
+        135px
+        1fr;
 
-.qr-box img{
+      gap: 10px;
 
-  width:215px;
+      align-items: start;
 
-  height:215px;
+      padding:
+        11px
+        0;
 
-  object-fit:contain;
+      border-bottom:
+        1px solid
+        #ecd7dc;
+    }
 
-}
+    .rule-row:last-child {
+      border-bottom: none;
+    }
 
-.travel-button{
+    .rule-number {
+      width: 34px;
 
-  margin-top:14px;
+      height: 34px;
 
-  padding:10px 36px;
+      display: flex;
 
-  border-radius:50px;
+      align-items: center;
 
-  background:
+      justify-content: center;
 
-    linear-gradient(
-      135deg,
-      #d97893,
-      #bd5874
-    );
+      border-radius: 50%;
 
-  color:white;
+      background:
 
-  font-size:19px;
+        linear-gradient(
+          135deg,
+          #e69ab0,
+          #c96883
+        );
 
-  font-weight:800;
+      color: white;
 
-}
+      font-size: 17px;
 
-.travel-en{
+      font-weight: 800;
+    }
 
-  margin-top:10px;
+    .rule-name {
+      padding-top: 4px;
 
-  color:#916371;
+      color: #724653;
 
-  font-size:15px;
+      font-size: 17px;
 
-}
+      font-weight: 800;
+    }
 
-.section-card{
+    .rule-content {
+      padding-top: 4px;
 
-  border-radius:28px;
+      color: #675862;
 
-  margin-bottom:20px;
+      font-size: 16px;
 
-  padding:20px 30px 14px;
+      line-height: 1.8;
+    }
 
-  background:
+    .highlight {
+      color: #c53f61;
 
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.93),
-      rgba(255,250,251,.86)
-    );
+      font-weight: 800;
 
-  border:
-    1px solid
-    rgba(255,255,255,.9);
+      text-decoration:
+        underline
+        2px
+        #e89bad;
 
-  box-shadow:
+      text-underline-offset: 5px;
+    }
 
-    0 15px 38px
-    rgba(210,110,145,.11);
 
-}
+    /* =========================================
+       Footer
+    ========================================= */
 
-.section-header{
+    .footer {
+      position: relative;
 
-  display:flex;
+      z-index: 2;
 
-  align-items:center;
+      padding:
+        18px
+        0
+        38px;
 
-  gap:10px;
+      text-align: center;
+    }
 
-  margin-bottom:10px;
+    .footer-title {
+      color: #9a455e;
 
-}
+      font-size: 28px;
 
-.section-title{
+      font-weight: 900;
+    }
 
-  color:#8c3f57;
+    .footer-tags {
+      margin-top: 8px;
 
-  font-size:32px;
+      color: #765964;
 
-  font-weight:900;
+      font-size: 17px;
 
-  white-space:nowrap;
+      letter-spacing: 2px;
+    }
 
-}
+    .footer-brand {
+      margin-top: 15px;
 
-.section-line{
+      color: #b86d81;
 
-  flex:1;
+      font-size: 17px;
+    }
 
-  height:2px;
+    .footer-text {
+      margin-top: 8px;
 
-  background:#d98ca1;
+      color: #6f6067;
 
-}
+      font-size: 16px;
+    }
 
-.section-en{
+    .footer-copy {
+      margin-top: 10px;
 
-  margin-left:12px;
+      color: #765e66;
 
-  color:#d28a9e;
+      font-size: 16px;
+    }
 
-  font-family:
-    "Dancing Script",
-    cursive;
+    .footer-script {
+      position: absolute;
 
-  font-size:20px;
+      right: 20px;
 
-}
+      top: 0;
 
-.rule-row{
+      color: #c9879a;
 
-  display:grid;
+      font-family:
+        "Dancing Script",
+        cursive;
 
-  grid-template-columns:
-    42px
-    135px
-    1fr;
+      font-size: 27px;
 
-  gap:10px;
+      line-height: 1.3;
 
-  padding:11px 0;
+      transform: rotate(-8deg);
+    }
 
-  border-bottom:
-    1px solid
-    #ecd7dc;
 
-}
+    /* =========================================
+       底部山脈背景
+    ========================================= */
 
-.rule-row:last-child{
+    .mountains {
+      position: absolute;
 
-  border-bottom:none;
+      left: 0;
 
-}
+      bottom: 0;
 
-.rule-number{
+      width: 100%;
 
-  width:34px;
+      height: 230px;
 
-  height:34px;
+      z-index: 0;
 
-  display:flex;
+      pointer-events: none;
 
-  align-items:center;
+      overflow: hidden;
+    }
 
-  justify-content:center;
+    .mountain-back {
+      position: absolute;
 
-  border-radius:50%;
+      left: -5%;
 
-  background:
+      bottom: -40px;
 
-    linear-gradient(
-      135deg,
-      #e69ab0,
-      #c96883
-    );
+      width: 110%;
 
-  color:white;
+      height: 170px;
 
-  font-weight:800;
+      background:
 
-}
+        linear-gradient(
+          135deg,
+          rgba(239,166,183,.55),
+          rgba(246,188,201,.7)
+        );
 
-.rule-name{
+      clip-path:
 
-  color:#724653;
+        polygon(
+          0 100%,
+          0 65%,
+          8% 45%,
+          17% 70%,
+          27% 30%,
+          38% 70%,
+          48% 40%,
+          58% 72%,
+          68% 25%,
+          80% 65%,
+          90% 35%,
+          100% 60%,
+          100% 100%
+        );
+    }
 
-  font-weight:800;
+    .mountain-front {
+      position: absolute;
 
-}
+      left: -5%;
 
-.rule-content{
+      bottom: -50px;
 
-  color:#675862;
+      width: 110%;
 
-  line-height:1.8;
+      height: 150px;
 
-}
+      background:
 
-.highlight{
+        linear-gradient(
+          135deg,
+          rgba(238,151,174,.55),
+          rgba(246,177,193,.75)
+        );
 
-  color:#c53f61;
+      clip-path:
 
-  font-weight:800;
+        polygon(
+          0 100%,
+          0 75%,
+          10% 45%,
+          20% 70%,
+          31% 35%,
+          42% 70%,
+          52% 45%,
+          63% 78%,
+          75% 35%,
+          87% 65%,
+          100% 45%,
+          100% 100%
+        );
+    }
 
-  text-decoration:
-    underline
-    2px
-    #e89bad;
 
-  text-underline-offset:5px;
+    /* =========================================
+       載入畫面
+    ========================================= */
 
-}
+    .loading {
+      padding: 100px 20px;
 
-.footer{
+      text-align: center;
 
-  padding:18px 0 38px;
+      color: #b75d78;
 
-  text-align:center;
+      font-size: 22px;
 
-}
+      font-weight: 700;
+    }
 
-.footer-title{
 
-  color:#9a455e;
+    /* =========================================
+       找不到優惠券
+    ========================================= */
 
-  font-size:28px;
+    .error-box {
+      margin: 80px auto;
 
-  font-weight:900;
+      max-width: 600px;
 
-}
+      padding: 50px 30px;
 
-.footer-tags{
+      border-radius: 30px;
 
-  margin-top:8px;
+      text-align: center;
 
-}
+      background:
+        rgba(255,255,255,.8);
 
-.footer-brand{
+      box-shadow:
 
-  margin-top:15px;
+        0 20px 50px
+        rgba(200,100,130,.12);
+    }
 
-  color:#b86d81;
+    .error-icon {
+      font-size: 60px;
+    }
 
-}
+    .error-title {
+      margin-top: 15px;
 
-.footer-text{
+      font-size: 30px;
 
-  margin-top:8px;
+      color: #b34d68;
 
-}
+      font-weight: 900;
+    }
 
-.footer-copy{
+    .error-text {
+      margin-top: 10px;
 
-  margin-top:10px;
+      color: #7c6570;
+    }
 
-}
 
-.loading{
+    /* =========================================
+       手機版
+    ========================================= */
 
-  padding:100px 20px;
+    @media(max-width:760px) {
 
-  text-align:center;
+      .page {
+        padding:
+          12px
+          14px
+          0;
+      }
 
-  color:#b75d78;
+      .header {
+        height: 105px;
 
-  font-size:22px;
+        border-radius: 22px;
+      }
 
-  font-weight:700;
+      .brand-box {
+        width: 230px;
 
-}
+        height: 58px;
 
-.error-box{
+        border-radius: 15px;
+      }
 
-  margin:80px auto;
+      .brand {
+        font-size: 28px;
 
-  max-width:600px;
+        letter-spacing: 9px;
 
-  padding:50px 30px;
+        padding-left: 9px;
+      }
 
-  border-radius:30px;
+      .brand-sub {
+        top: 72px;
 
-  text-align:center;
+        font-size: 11px;
 
-  background:
-    rgba(255,255,255,.8);
+        letter-spacing: 3px;
+      }
 
-}
+      .header-flower {
+        font-size: 28px;
+      }
 
-.error-icon{
+      .header-flower.left {
+        left: 25px;
+      }
 
-  font-size:60px;
+      .header-flower.right {
+        right: 25px;
+      }
 
-}
+      .header-script {
+        display: none;
+      }
 
-.error-title{
+      .coupon-card {
+        padding:
+          22px
+          18px
+          20px;
 
-  margin-top:15px;
+        border-radius: 25px;
+      }
 
-  font-size:30px;
+      .coupon-inner {
+        grid-template-columns: 1fr;
+      }
 
-  color:#b34d68;
+      .coupon-divider {
+        display: none;
+      }
 
-  font-weight:900;
+      .coupon-left {
+        padding: 0;
+      }
 
-}
+      .discount-title {
+        margin-top: 25px;
 
-.error-text{
+        font-size: 20px;
+      }
 
-  margin-top:10px;
+      .discount {
+        font-size: 90px;
+      }
 
-  color:#7c6570;
+      .heart-doodle {
+        right: 20px;
 
-}
+        top: 80px;
 
-@media(max-width:760px){
+        font-size: 55px;
+      }
 
-  .page{
+      .left-travel-text {
+        display: none;
+      }
 
-    padding:12px 14px 0;
+      .info-row {
+        grid-template-columns:
+          32px
+          95px
+          1fr;
 
-  }
+        padding: 0 12px;
+      }
 
-  .header{
+      .info-label {
+        font-size: 14px;
+      }
 
-    height:105px;
+      .info-value {
+        font-size: 14px;
 
-  }
+        word-break: break-all;
+      }
 
-  .brand-box{
+      .travel-message {
+        font-size: 16px;
+      }
 
-    width:230px;
+      .coupon-right {
+        padding: 20px 0 0;
+      }
 
-    height:58px;
+      .qr-box {
+        width: 220px;
 
-  }
+        height: 220px;
+      }
 
-  .brand{
+      .qr-box img {
+        width: 185px;
 
-    font-size:28px;
+        height: 185px;
+      }
 
-    letter-spacing:9px;
+      .section-card {
+        padding:
+          18px
+          15px
+          10px;
 
-  }
+        border-radius: 22px;
+      }
 
-  .brand-sub{
+      .section-title {
+        font-size: 25px;
+      }
 
-    top:72px;
+      .section-en {
+        font-size: 15px;
+      }
 
-    font-size:11px;
+      .rule-row {
+        grid-template-columns:
+          34px
+          90px
+          1fr;
 
-  }
+        gap: 6px;
+      }
 
-  .header-flower{
+      .rule-number {
+        width: 28px;
 
-    font-size:28px;
+        height: 28px;
 
-  }
+        font-size: 14px;
+      }
 
-  .header-flower.left{
+      .rule-name {
+        font-size: 14px;
+      }
 
-    left:25px;
+      .rule-content {
+        font-size: 13px;
 
-  }
+        line-height: 1.7;
+      }
 
-  .header-flower.right{
+      .footer-title {
+        font-size: 21px;
+      }
 
-    right:25px;
+      .footer-tags {
+        font-size: 13px;
+      }
 
-  }
+      .footer-brand {
+        font-size: 13px;
+      }
 
-  .header-script{
+      .footer-text {
+        font-size: 13px;
+      }
 
-    display:none;
+      .footer-copy {
+        font-size: 12px;
+      }
 
-  }
+      .footer-script {
+        display: none;
+      }
 
-  .coupon-card{
+    }
 
-    padding:22px 18px 20px;
-
-  }
-
-  .coupon-inner{
-
-    grid-template-columns:1fr;
-
-  }
-
-  .coupon-divider{
-
-    display:none;
-
-  }
-
-  .coupon-left{
-
-    padding:0;
-
-  }
-
-  .discount{
-
-    font-size:90px;
-
-  }
-
-  .coupon-right{
-
-    padding:20px 0 0;
-
-  }
-
-  .info-row{
-
-    grid-template-columns:
-      32px
-      95px
-      1fr;
-
-    padding:0 12px;
-
-  }
-
-  .info-label{
-
-    font-size:14px;
-
-  }
-
-  .info-value{
-
-    font-size:14px;
-
-  }
-
-  .section-card{
-
-    padding:18px 15px;
-
-  }
-
-  .section-title{
-
-    font-size:25px;
-
-  }
-
-  .section-en{
-
-    display:none;
-
-  }
-
-  .rule-row{
-
-    grid-template-columns:
-      34px
-      90px
-      1fr;
-
-  }
-
-  .rule-name{
-
-    font-size:14px;
-
-  }
-
-  .rule-content{
-
-    font-size:13px;
-
-  }
-
-}
-
-</style>
+  </style>
 
 </head>
 
+
 <body>
 
-<div class="bg-flower flower-1">🌸</div>
-<div class="bg-flower flower-2">🌸</div>
-<div class="bg-flower flower-3">🌸</div>
-<div class="bg-flower flower-4">🌸</div>
 
-<div class="page">
+  <!-- 背景花朵 -->
 
-  <div class="header">
+  <div class="bg-flower flower-1">
+    🌸
+  </div>
 
-    <div class="header-flower left">🌸</div>
+  <div class="bg-flower flower-2">
+    🌸
+  </div>
 
-    <div class="brand-box">
+  <div class="bg-flower flower-3">
+    🌸
+  </div>
 
-      <div class="brand">
-        囍莉旅遊
+  <div class="bg-flower flower-4">
+    🌸
+  </div>
+
+
+  <div class="page">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+
+      <div class="header-flower left">
+        🌸
+      </div>
+
+
+      <div class="brand-box">
+
+        <div class="brand">
+          囍莉旅遊
+        </div>
+
+      </div>
+
+
+      <div class="brand-sub">
+
+        ✈
+        <span>
+          跟著阿冷四處玩吧！！
+        </span>
+        ✈
+
+      </div>
+
+
+      <div class="header-flower right">
+        🌸
+      </div>
+
+
+      <div class="header-script">
+
+        Travel<br>
+        Happy<br>
+        Together ♡
+
+      </div>
+
+
+    </div>
+
+
+    <!-- 動態優惠券 -->
+
+    <div id="app">
+
+      <div class="loading">
+
+        🌸 優惠券載入中...
+
       </div>
 
     </div>
 
-    <div class="brand-sub">
-      ✈ <span>跟著阿冷四處玩吧！！</span> ✈
-    </div>
-
-    <div class="header-flower right">🌸</div>
-
-    <div class="header-script">
-      Travel<br>
-      Happy<br>
-      Together ♡
-    </div>
 
   </div>
-
-  <div id="app">
-
-    <div class="loading">
-      🌸 優惠券載入中...
-    </div>
-
-  </div>
-
-</div>
 
 
 <script>
 
-/* =========================================
-   Google Apps Script API
-========================================= */
-
-const API_URL =
-"https://script.google.com/macros/s/AKfycbxChJA50TlN2KFvwxmyvKGS_uJlHqqEM4zUCs8KTd53AzL_TtQFusXMdUD8KCVDb8qO1A/exec";
-
 
 /* =========================================
-   HTML 安全
+   取得優惠券序號
+
+   GitHub Pages 版本：
+   從網址取得 ?coupon=XXXX
 ========================================= */
 
-function escapeHtml(value){
+const params = new URLSearchParams(
+  window.location.search
+);
+
+const couponCode =
+  params.get("coupon") || "";
+
+
+/* =========================================
+   HTML 防止特殊字元
+========================================= */
+
+function escapeHtml(value) {
 
   return String(value ?? "")
 
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
 /* =========================================
-   取得網址優惠券代碼
-========================================= */
-
-const urlParams =
-  new URLSearchParams(
-    window.location.search
-  );
-
-const couponCode =
-  urlParams.get("code");
-
-
-/* =========================================
    載入優惠券
+
+   ⚠️ 這裡目前仍然使用原本
+   Google Apps Script 的方式。
+
+   下一步才會把這裡改成
+   GitHub Pages → Apps Script API。
 ========================================= */
 
-async function loadCoupon(){
+window.addEventListener(
 
-  if(!couponCode){
+  "DOMContentLoaded",
 
-    showError(
-      "找不到優惠券編號，請確認連結是否正確"
-    );
+  function() {
 
-    return;
-
-  }
-
-
-  try{
-
-    const url =
-
-      API_URL +
-
-      "?action=getCoupon&code=" +
-
-      encodeURIComponent(
-        couponCode
-      );
-
-
-    const response =
-      await fetch(url);
-
-
-    const data =
-      await response.json();
-
-
-    if(
-      !data.success
-    ){
+    if (!couponCode) {
 
       showError(
-        data.message ||
-        "找不到這張優惠券"
+        "找不到優惠券編號，請確認連結是否正確"
       );
 
       return;
@@ -1226,28 +1481,37 @@ async function loadCoupon(){
     }
 
 
-    renderCoupon(data);
+    google.script.run
+
+      .withSuccessHandler(
+        renderCoupon
+      )
+
+      .withFailureHandler(
+        function(error) {
+
+          showError(
+            error.message ||
+            "優惠券載入失敗"
+          );
+
+        }
+      )
+
+      .getCoupon(
+        couponCode
+      );
 
   }
 
-  catch(error){
-
-    console.error(error);
-
-    showError(
-      "優惠券載入失敗，請稍後再試"
-    );
-
-  }
-
-}
+);
 
 
 /* =========================================
-   找不到優惠券
+   顯示找不到優惠券
 ========================================= */
 
-function showError(message){
+function showError(message) {
 
   const app =
     document.getElementById(
@@ -1270,7 +1534,8 @@ function showError(message){
       <div class="error-text">
 
         ${
-          escapeHtml(message)
+          message ||
+          "此優惠券不存在或連結錯誤"
         }
 
       </div>
@@ -1283,38 +1548,20 @@ function showError(message){
 
 
 /* =========================================
-   產生 QR Code
-========================================= */
-
-function getQrUrl(code){
-
-  const customerUrl =
-
-    window.location.origin +
-
-    window.location.pathname +
-
-    "?code=" +
-
-    encodeURIComponent(code);
-
-
-  return
-
-    "https://quickchart.io/qr?size=500&text=" +
-
-    encodeURIComponent(
-      customerUrl
-    );
-
-}
-
-
-/* =========================================
    顯示優惠券
 ========================================= */
 
-function renderCoupon(data){
+function renderCoupon(data) {
+
+
+  if (!data) {
+
+    showError();
+
+    return;
+
+  }
+
 
   const app =
     document.getElementById(
@@ -1328,9 +1575,11 @@ function renderCoupon(data){
     data.status;
 
 
-  if(
+  /* 未使用 */
+
+  if (
     data.status === "未使用"
-  ){
+  ) {
 
     statusText =
       "✓ 未使用";
@@ -1338,9 +1587,11 @@ function renderCoupon(data){
   }
 
 
-  if(
+  /* 已使用 */
+
+  if (
     data.status === "已使用"
-  ){
+  ) {
 
     statusClass =
       "used";
@@ -1351,16 +1602,30 @@ function renderCoupon(data){
   }
 
 
-  const qrUrl =
-    getQrUrl(
-      data.code
-    );
+  /* 已過期 */
+
+  if (
+    data.status === "已過期"
+  ) {
+
+    statusClass =
+      "expired";
+
+    statusText =
+      "已過期";
+
+  }
 
 
   app.innerHTML = `
 
 
+  <!-- =====================================
+       優惠券
+  ====================================== -->
+
   <section class="coupon-card">
+
 
     <div class="coupon-divider"></div>
 
@@ -1368,14 +1633,28 @@ function renderCoupon(data){
     <div class="coupon-inner">
 
 
+      <!-- 左邊 -->
+
       <div class="coupon-left">
 
 
         <div
-          class="status ${statusClass}"
+          class="
+            status
+            ${statusClass}
+          "
         >
 
           ${escapeHtml(statusText)}
+
+        </div>
+
+
+        <div class="left-travel-text">
+
+          一起出發<br>
+          看更大的世界<br>
+          ♡
 
         </div>
 
@@ -1404,6 +1683,8 @@ function renderCoupon(data){
         <div class="info-box">
 
 
+          <!-- 優惠券號碼 -->
+
           <div class="info-row">
 
             <div class="info-icon">
@@ -1422,6 +1703,8 @@ function renderCoupon(data){
 
           </div>
 
+
+          <!-- 有效期限 -->
 
           <div class="info-row">
 
@@ -1442,6 +1725,8 @@ function renderCoupon(data){
           </div>
 
 
+          <!-- 備註 -->
+
           <div class="info-row">
 
             <div class="info-icon">
@@ -1454,7 +1739,11 @@ function renderCoupon(data){
 
             <div class="info-value">
 
-              ${escapeHtml(data.note)}
+              ${
+                escapeHtml(
+                  data.note || "無"
+                )
+              }
 
             </div>
 
@@ -1476,6 +1765,7 @@ function renderCoupon(data){
       </div>
 
 
+      <!-- 右邊 -->
 
       <div class="coupon-right">
 
@@ -1492,7 +1782,7 @@ function renderCoupon(data){
         <div class="qr-box">
 
           <img
-            src="${qrUrl}"
+            src="${escapeHtml(data.qrUrl)}"
             alt="優惠券 QR Code"
           >
 
@@ -1522,11 +1812,15 @@ function renderCoupon(data){
   </section>
 
 
+  <!-- =====================================
+       使用說明
+  ====================================== -->
 
   <section class="section-card">
 
 
     <div class="section-header">
+
 
       <div class="section-title">
 
@@ -1534,14 +1828,27 @@ function renderCoupon(data){
 
       </div>
 
+
       <div class="section-line"></div>
+
+
+      <div class="section-en">
+
+        Enjoy Your Journey ♥
+
+      </div>
+
 
     </div>
 
 
+    <!-- 1 -->
+
     <div class="rule-row">
 
-      <div class="rule-number">1</div>
+      <div class="rule-number">
+        1
+      </div>
 
       <div class="rule-name">
         適用行程
@@ -1562,9 +1869,13 @@ function renderCoupon(data){
     </div>
 
 
+    <!-- 2 -->
+
     <div class="rule-row">
 
-      <div class="rule-number">2</div>
+      <div class="rule-number">
+        2
+      </div>
 
       <div class="rule-name">
         使用方式
@@ -1585,9 +1896,13 @@ function renderCoupon(data){
     </div>
 
 
+    <!-- 3 -->
+
     <div class="rule-row">
 
-      <div class="rule-number">3</div>
+      <div class="rule-number">
+        3
+      </div>
 
       <div class="rule-name">
         使用次數
@@ -1608,9 +1923,13 @@ function renderCoupon(data){
     </div>
 
 
+    <!-- 4 -->
+
     <div class="rule-row">
 
-      <div class="rule-number">4</div>
+      <div class="rule-number">
+        4
+      </div>
 
       <div class="rule-name">
         使用限制
@@ -1619,7 +1938,7 @@ function renderCoupon(data){
       <div class="rule-content">
 
         <span class="highlight">
-          每一團每位旅客限使用 1 張折價券
+          每一團每位旅客 限使用 1 張折價券
         </span>
 
         。
@@ -1629,9 +1948,13 @@ function renderCoupon(data){
     </div>
 
 
+    <!-- 5 -->
+
     <div class="rule-row">
 
-      <div class="rule-number">5</div>
+      <div class="rule-number">
+        5
+      </div>
 
       <div class="rule-name">
         使用期限
@@ -1655,11 +1978,15 @@ function renderCoupon(data){
   </section>
 
 
+  <!-- =====================================
+       注意事項
+  ====================================== -->
 
   <section class="section-card">
 
 
     <div class="section-header">
+
 
       <div class="section-title">
 
@@ -1667,14 +1994,27 @@ function renderCoupon(data){
 
       </div>
 
+
       <div class="section-line"></div>
+
+
+      <div class="section-en">
+
+        Travel with Love ♥
+
+      </div>
+
 
     </div>
 
 
+    <!-- 1 -->
+
     <div class="rule-row">
 
-      <div class="rule-number">1</div>
+      <div class="rule-number">
+        1
+      </div>
 
       <div class="rule-name">
         不得兌換現金
@@ -1682,16 +2022,26 @@ function renderCoupon(data){
 
       <div class="rule-content">
 
-        本折價券不得兌換現金、找零或兌換其他等值商品。
+        本折價券為活動贈送之旅遊折價券，
+
+        <span class="highlight">
+          不得兌換現金、找零或兌換其他等值商品
+        </span>
+
+        。
 
       </div>
 
     </div>
 
 
+    <!-- 2 -->
+
     <div class="rule-row">
 
-      <div class="rule-number">2</div>
+      <div class="rule-number">
+        2
+      </div>
 
       <div class="rule-name">
         不得與其他優惠併用
@@ -1699,16 +2049,26 @@ function renderCoupon(data){
 
       <div class="rule-content">
 
-        本折價券不得與其他折扣、優惠或活動同時使用。
+        本折價券
+
+        <span class="highlight">
+          不得與其他折扣、優惠或活動同時使用
+        </span>
+
+        。
 
       </div>
 
     </div>
 
 
+    <!-- 3 -->
+
     <div class="rule-row">
 
-      <div class="rule-number">3</div>
+      <div class="rule-number">
+        3
+      </div>
 
       <div class="rule-name">
         報名後無法補用
@@ -1716,33 +2076,69 @@ function renderCoupon(data){
 
       <div class="rule-content">
 
-        使用折價券時須於報名前主動提出，完成報名後恕無法事後補用。
+        使用折價券時，須於
+
+        <span class="highlight">
+          報名前主動提出
+        </span>
+
+        ；
+
+        <span class="highlight">
+          完成報名後恕無法事後補用
+        </span>
+
+        。
 
       </div>
 
     </div>
 
 
+    <!-- 4 -->
+
     <div class="rule-row">
 
-      <div class="rule-number">4</div>
+      <div class="rule-number">
+        4
+      </div>
 
       <div class="rule-name">
-        取消或退費
+        取消、退費或改團
       </div>
 
       <div class="rule-content">
 
-        如因旅客個人因素取消、退費或改團，本折價券恕不退還。
+        如因旅客個人因素取消、退費或改團，
+
+        <span class="highlight">
+          本折價券恕不退還，亦不得再次使用
+        </span>
+
+        。
+
+        <br><br>
+
+        如因囍莉旅遊取消行程，或因天候、天然災害等不可抗力因素致行程取消，
+
+        <span class="highlight">
+          本折價券將退回並保留原使用資格
+        </span>
+
+        。
 
       </div>
 
     </div>
 
 
+    <!-- 5 -->
+
     <div class="rule-row">
 
-      <div class="rule-number">5</div>
+      <div class="rule-number">
+        5
+      </div>
 
       <div class="rule-name">
         不得轉售
@@ -1750,7 +2146,72 @@ function renderCoupon(data){
 
       <div class="rule-content">
 
-        本折價券不得轉售或作為其他商業用途。
+        本折價券
+
+        <span class="highlight">
+          不得轉售或作為其他商業用途
+        </span>
+
+        。
+
+      </div>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="rule-row">
+
+      <div class="rule-number">
+        6
+      </div>
+
+      <div class="rule-name">
+        妥善保管
+      </div>
+
+      <div class="rule-content">
+
+        請妥善保管本電子折價券及 QR Code，
+
+        <span class="highlight">
+          避免提供給他人使用
+        </span>
+
+        。
+
+        <br><br>
+
+        如因個人因素導致折價券遭他人使用或核銷，
+
+        <span class="highlight">
+          囍莉旅遊概不負責
+        </span>
+
+        。
+
+      </div>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="rule-row">
+
+      <div class="rule-number">
+        7
+      </div>
+
+      <div class="rule-name">
+        其他事項
+      </div>
+
+      <div class="rule-content">
+
+        本折價券其他未列明事項，
+        依相關法令及雙方約定辦理。
 
       </div>
 
@@ -1760,8 +2221,12 @@ function renderCoupon(data){
   </section>
 
 
+  <!-- =====================================
+       Footer
+  ====================================== -->
 
   <footer class="footer">
+
 
     <div class="footer-title">
 
@@ -1769,11 +2234,20 @@ function renderCoupon(data){
 
     </div>
 
+
+    <div class="footer-tags">
+
+      台南出發 ｜ 遊覽車旅行 ｜ 輕鬆慢遊 ｜ 溫暖同行
+
+    </div>
+
+
     <div class="footer-brand">
 
       🌸 囍莉旅遊 ｜ 台南出發小旅行 🌸
 
     </div>
+
 
     <div class="footer-text">
 
@@ -1781,33 +2255,25 @@ function renderCoupon(data){
 
     </div>
 
+
     <div class="footer-copy">
 
       © 2026 囍莉旅遊 All Rights Reserved.
 
     </div>
 
+
+    <div class="footer-script">
+
+      Small Trip<br>
+      Big Happiness<br>
+      ♡
+
+    </div>
+
+
   </footer>
 
-
-  `;
-
-}
-
-
-/* =========================================
-   網頁開啟後載入
-========================================= */
-
-document.addEventListener(
-
-  "DOMContentLoaded",
-
-  loadCoupon
-
-);
-
-</script>
 
 </body>
 
