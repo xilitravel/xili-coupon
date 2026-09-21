@@ -2535,6 +2535,71 @@ button:active {
 
 }
 
+  .popup-success {
+
+  position: fixed;
+
+  bottom: 30px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  background: #e8f8ef;
+
+  color: #3b8c61;
+
+  padding: 18px 30px;
+
+  border-radius: 20px;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+
+  z-index: 9999;
+
+  animation: popupFade 1s forwards;
+
+}
+
+
+@keyframes popupFade {
+
+  0% {
+
+    opacity: 0;
+
+    transform: translate(-50%,20px);
+
+  }
+
+
+  20% {
+
+    opacity: 1;
+
+    transform: translate(-50%,0);
+
+  }
+
+
+  80% {
+
+    opacity: 1;
+
+  }
+
+
+  100% {
+
+    opacity: 0;
+
+  }
+
+}
 
 /* =========================
    建立結果
@@ -4071,7 +4136,32 @@ function showRedeemResult(
       ? "✅ 核銷成功！優惠券已使用"
       : "❌ 核銷失敗"
   );
+  
+if(success === true){
 
+  const popup =
+    document.createElement("div");
+
+  popup.className =
+    "popup-success";
+
+  popup.innerHTML =
+    "✅ 核銷成功！";
+
+  document.body.appendChild(
+    popup
+  );
+
+  setTimeout(
+    function(){
+
+      popup.remove();
+
+    },
+    1000
+  );
+
+}
 }
   
 /* =========================================================
@@ -4194,15 +4284,15 @@ function showRedeemResult(
 
             qrCodeMessage => {
 
-              redeemCoupon(
-                qrCodeMessage
-              );
+                if(scannerRunning){
 
-            }
+    scannerRunning = false;
 
-          );
+    redeemCoupon(
+      qrCodeMessage
+    );
 
-      }
+  }
 
     )
 
