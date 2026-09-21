@@ -91,6 +91,7 @@
     }
 
 
+
     /* =========================================
        背景裝飾
     ========================================= */
@@ -132,6 +133,7 @@
     }
 
 
+
     /* =========================================
        主容器
     ========================================= */
@@ -152,6 +154,7 @@
         60px
         0;
     }
+
 
 
     /* =========================================
@@ -292,6 +295,7 @@
     }
 
 
+
     /* =========================================
        優惠券
     ========================================= */
@@ -338,6 +342,7 @@
 
       min-height: 360px;
     }
+
 
 
     /* =========================================
@@ -538,6 +543,7 @@
     }
 
 
+
     /* =========================================
        中間虛線
     ========================================= */
@@ -555,6 +561,7 @@
         2px dashed
         rgba(230,155,175,.5);
     }
+
 
 
     /* =========================================
@@ -678,6 +685,7 @@
     }
 
 
+
     /* =========================================
        Section 共用
     ========================================= */
@@ -763,6 +771,7 @@
 
       white-space: nowrap;
     }
+
 
 
     /* =========================================
@@ -856,6 +865,7 @@
     }
 
 
+
     /* =========================================
        Footer
     ========================================= */
@@ -934,6 +944,7 @@
 
       transform: rotate(-8deg);
     }
+
 
 
     /* =========================================
@@ -1034,6 +1045,7 @@
     }
 
 
+
     /* =========================================
        載入畫面
     ========================================= */
@@ -1049,6 +1061,7 @@
 
       font-weight: 700;
     }
+
 
 
     /* =========================================
@@ -1094,6 +1107,7 @@
 
       color: #7c6570;
     }
+
 
 
     /* =========================================
@@ -1312,7 +1326,9 @@
 </head>
 
 
+
 <body>
+
 
 
   <!-- 背景花朵 -->
@@ -1334,7 +1350,9 @@
   </div>
 
 
+
   <div class="page">
+
 
 
     <!-- HEADER -->
@@ -1342,9 +1360,11 @@
     <div class="header">
 
 
+
       <div class="header-flower left">
         🌸
       </div>
+
 
 
       <div class="brand-box">
@@ -1354,6 +1374,7 @@
         </div>
 
       </div>
+
 
 
       <div class="brand-sub">
@@ -1367,9 +1388,11 @@
       </div>
 
 
+
       <div class="header-flower right">
         🌸
       </div>
+
 
 
       <div class="header-script">
@@ -1381,7 +1404,9 @@
       </div>
 
 
+
     </div>
+
 
 
     <!-- 動態優惠券 -->
@@ -1397,10 +1422,19 @@
     </div>
 
 
+
   </div>
 
 
+
 <script>
+
+/* =========================================
+   Apps Script API
+========================================= */
+
+const API_URL =
+  "https://script.google.com/macros/s/AKfyCbyvw7Fuhzi59rNfbNBsxCoZrxo9QCC5NRurcvOZYfhwRmKCDbeTHtj4hVwChTkqxwev4w/exec";
 
 
 /* =========================================
@@ -1455,60 +1489,7 @@ function escapeHtml(value) {
 
 
 /* =========================================
-   載入優惠券
-
-   ⚠️ 這裡目前仍然使用原本
-   Google Apps Script 的方式。
-
-   下一步才會把這裡改成
-   GitHub Pages → Apps Script API。
-========================================= */
-
-window.addEventListener(
-
-  "DOMContentLoaded",
-
-  function() {
-
-    if (!couponCode) {
-
-      showError(
-        "找不到優惠券編號，請確認連結是否正確"
-      );
-
-      return;
-
-    }
-
-
-    google.script.run
-
-      .withSuccessHandler(
-        renderCoupon
-      )
-
-      .withFailureHandler(
-        function(error) {
-
-          showError(
-            error.message ||
-            "優惠券載入失敗"
-          );
-
-        }
-      )
-
-      .getCoupon(
-        couponCode
-      );
-
-  }
-
-);
-
-
-/* =========================================
-   顯示找不到優惠券
+   顯示錯誤
 ========================================= */
 
 function showError(message) {
@@ -1517,7 +1498,6 @@ function showError(message) {
     document.getElementById(
       "app"
     );
-
 
   app.innerHTML = `
 
@@ -1534,8 +1514,10 @@ function showError(message) {
       <div class="error-text">
 
         ${
-          message ||
-          "此優惠券不存在或連結錯誤"
+          escapeHtml(
+            message ||
+            "此優惠券不存在或連結錯誤"
+          )
         }
 
       </div>
@@ -1543,6 +1525,205 @@ function showError(message) {
     </div>
 
   `;
+
+}
+
+
+/* =========================================
+   GitHub Pages → Apps Script
+
+   使用 JSONP 避免跨網域問題
+========================================= */
+
+function loadCoupon() {
+
+  if (!couponCode) {
+
+    showError(
+      "找不到優惠券編號，請確認連結是否正確"
+    );
+
+    return;
+
+  }
+
+
+  const callbackName =
+    "couponCallback_" +
+    Date.now() +
+    "_" +
+    Math.floor(
+      Math.random() * 100000
+    );
+
+
+  let finished = false;
+
+
+  window[callbackName] =
+    function(result) {
+
+      if (finished) {
+        return;
+      }
+
+      finished = true;
+
+
+      clearTimeout(
+        timeoutId
+      );
+
+
+      try {
+
+        if (
+          !result ||
+          result.success !== true
+        ) {
+
+          showError(
+            result &&
+            result.message
+              ? result.message
+              : "優惠券載入失敗"
+          );
+
+          return;
+
+        }
+
+
+        renderCoupon(
+          result.data
+        );
+
+      } catch (error) {
+
+        showError(
+          "優惠券資料處理失敗"
+        );
+
+      } finally {
+
+        delete window[
+          callbackName
+        ];
+
+        if (
+          script &&
+          script.parentNode
+        ) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+
+      }
+
+    };
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  const requestUrl =
+    API_URL +
+    "?action=getcoupon" +
+    "&code=" +
+    encodeURIComponent(
+      couponCode
+    ) +
+    "&prefix=" +
+    encodeURIComponent(
+      callbackName
+    );
+
+
+  script.src =
+    requestUrl;
+
+
+  script.async = true;
+
+
+  script.onerror =
+    function() {
+
+      if (finished) {
+        return;
+      }
+
+      finished = true;
+
+      clearTimeout(
+        timeoutId
+      );
+
+      delete window[
+        callbackName
+      ];
+
+      showError(
+        "優惠券連線失敗，請稍後再試"
+      );
+
+      if (
+        script.parentNode
+      ) {
+
+        script.parentNode.removeChild(
+          script
+        );
+
+      }
+
+    };
+
+
+  document
+    .head
+    .appendChild(
+      script
+    );
+
+
+  const timeoutId =
+    setTimeout(
+      function() {
+
+        if (finished) {
+          return;
+        }
+
+        finished = true;
+
+        delete window[
+          callbackName
+        ];
+
+        showError(
+          "優惠券載入逾時，請稍後再試"
+        );
+
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+
+      },
+      30000
+    );
 
 }
 
@@ -1556,7 +1737,9 @@ function renderCoupon(data) {
 
   if (!data) {
 
-    showError();
+    showError(
+      "優惠券資料不存在"
+    );
 
     return;
 
@@ -1812,6 +1995,7 @@ function renderCoupon(data) {
   </section>
 
 
+
   <!-- =====================================
        使用說明
   ====================================== -->
@@ -1976,6 +2160,7 @@ function renderCoupon(data) {
 
 
   </section>
+
 
 
   <!-- =====================================
@@ -2221,6 +2406,7 @@ function renderCoupon(data) {
   </section>
 
 
+
   <!-- =====================================
        Footer
   ====================================== -->
@@ -2273,6 +2459,7 @@ function renderCoupon(data) {
 
 
   </footer>
+
 
 
 </body>
