@@ -3517,9 +3517,10 @@ function login(){
 
 
   fetch(
-    "https://xilitravel-coupon.xilitravel.workers.dev/?action=stafflogin&pin="
-    + pin
-  )
+  API_URL +
+  "?action=stafflogin&pin=" +
+  encodeURIComponent(pin)
+)
 
   .then(
     response => response.json()
