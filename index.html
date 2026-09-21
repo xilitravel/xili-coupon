@@ -3310,7 +3310,9 @@ const API_URL =
 const TOKEN_KEY =
   "xiliStaffToken";
 
-
+let scannerRunning = false;
+let html5QrCode = null;
+  
 /* =========================================================
    JSONP API 呼叫工具
 ========================================================= */
@@ -4065,9 +4067,6 @@ function showRedeemResult(
 /* =========================================================
    開啟相機
 ========================================================= */
-
-  let scannerRunning = false;
-  let html5QrCode = null;
   
   function startScanner() {
 
