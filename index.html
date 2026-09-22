@@ -3616,6 +3616,38 @@ function login(){
 
 else{
 
+  loginFailCount++;
+
+
+  if(loginFailCount >= 5){
+
+    document
+      .getElementById("loginMessage")
+      .style.display = "block";
+
+
+    document
+      .getElementById("loginMessage")
+      .className =
+        "result-box error";
+
+
+    document
+      .getElementById("loginMessage")
+      .innerHTML =
+        "⚠️ 密碼錯誤太多次，請稍後再試";
+
+
+    document
+      .getElementById("pin")
+      .value = "";
+
+
+    return;
+
+  }
+
+
   document
     .getElementById("loginMessage")
     .style.display = "block";
@@ -3628,14 +3660,14 @@ else{
 
 
   document
-  .getElementById("loginMessage")
-  .innerHTML =
-    "❌ 工作人員密碼錯誤，請重新輸入";
+    .getElementById("loginMessage")
+    .innerHTML =
+      "❌ 工作人員密碼錯誤，請重新輸入";
 
 
-document
-  .getElementById("pin")
-  .value = "";
+  document
+    .getElementById("pin")
+    .value = "";
 
 }
 
