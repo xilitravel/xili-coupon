@@ -3710,8 +3710,40 @@ function login(){
         document
         .getElementById("dashboard")
         .style.display="block";
+document
+  .getElementById("dashboard")
+  .style.display="block";
 
-      }
+
+// 登入成功動畫
+
+const popup =
+  document.createElement("div");
+
+
+popup.className =
+  "login-success-popup";
+
+
+popup.innerHTML =
+  "🌸 登入成功！<br>歡迎進入囍莉旅遊後台";
+
+
+document.body.appendChild(
+  popup
+);
+
+
+setTimeout(
+  function(){
+
+    popup.remove();
+
+  },
+  1500
+);
+
+}
 
 else{
 
