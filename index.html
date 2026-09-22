@@ -3379,6 +3379,7 @@ let scannerRunning = false;
 let html5QrCode = null;
 
 let loginFailCount = 0;
+let loginLock = false;
   
 /* =========================================================
    JSONP API 呼叫工具
@@ -3577,6 +3578,13 @@ function getStaffToken() {
 
 function login(){
 
+
+  if(loginLock){
+
+    return;
+
+  }
+
   const pin =
     document
     .getElementById("pin")
@@ -3620,6 +3628,38 @@ else{
 
 
   if(loginFailCount >= 5){
+
+    loginLock = true;
+
+    let seconds = 30;
+
+    const timer =
+    setInterval(function(){
+
+      seconds--;
+
+      document
+        .getElementById("loginMessage")
+        .innerHTML =
+           ""🔒 請等待 " + seconds + " 秒後再登入";
+
+
+if(seconds <= 0){
+
+  clearInterval(timer);
+
+  loginLock = false;
+
+  loginFailCount = 0;
+
+  document
+    .getElementById("loginMessage")
+    .innerHTML =
+      "✅ 可以重新登入";
+
+}
+
+  },1000);
 
     document
       .getElementById("loginMessage")
