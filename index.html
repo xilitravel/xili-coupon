@@ -2600,6 +2600,97 @@ button:active {
   }
 
 }
+/* =========================
+   登入成功提示
+========================= */
+
+.login-success-popup {
+
+  position: fixed;
+
+  top: 40%;
+
+  left: 50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  background:
+    rgba(255,255,255,.95);
+
+  color:
+    #a95770;
+
+  padding:
+    25px 45px;
+
+  border-radius:
+    25px;
+
+  font-size:
+    24px;
+
+  font-weight:
+    700;
+
+  box-shadow:
+    0 15px 40px
+    rgba(180,100,130,.25);
+
+  z-index:
+    9999;
+
+  animation:
+    loginPopupFade
+    1.5s
+    forwards;
+
+}
+
+
+
+@keyframes loginPopupFade {
+
+  0% {
+
+    opacity:0;
+
+    transform:
+      translate(-50%,-60%)
+      scale(.8);
+
+  }
+
+
+  30% {
+
+    opacity:1;
+
+    transform:
+      translate(-50%,-50%)
+      scale(1.05);
+
+  }
+
+
+  70% {
+
+    opacity:1;
+
+  }
+
+
+  100% {
+
+    opacity:0;
+
+    transform:
+      translate(-50%,-40%)
+      scale(.95);
+
+  }
+
+}
 
 /* =========================
    建立結果
