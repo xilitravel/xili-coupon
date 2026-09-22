@@ -4169,164 +4169,110 @@ if(success === true){
    開啟相機
 ========================================================= */
   
-  function startScanner() {
+function startScanner() {
 
-  if (
-    scannerRunning
-  ) {
-
+  if (scannerRunning) {
     return;
-
   }
 
+  html5QrCode = new Html5Qrcode("reader");
 
-  html5QrCode =
-    new Html5Qrcode(
-      "reader"
-    );
-
-
-  scannerRunning =
-    true;
+  scannerRunning = true;
 
 
   Html5Qrcode
-
     .getCameras()
 
-    .then(
+    .then(cameras => {
 
-      cameras => {
+      if (!cameras || cameras.length === 0) {
+        throw new Error("找不到相機");
+      }
+
+
+      let cameraId = cameras[0].id;
+
+
+      cameras.forEach(camera => {
+
+        const label =
+          (camera.label || "").toLowerCase();
+
 
         if (
-          !cameras ||
-          cameras.length === 0
+          label.includes("back") ||
+          label.includes("rear") ||
+          label.includes("後")
         ) {
 
-          throw new Error(
-            "找不到相機"
-          );
+          cameraId = camera.id;
 
         }
 
-
-        let cameraId =
-          cameras[0].id;
+      });
 
 
-        /* 優先找後鏡頭 */
+      return html5QrCode.start(
 
-        cameras.forEach(
+        cameraId,
 
-          camera => {
+        {
+          fps: 10,
+          qrbox: {
+            width:220,
+            height:220
+          }
+        },
 
-            const label =
-              (
-                camera.label ||
-                ""
-              )
-              .toLowerCase();
 
+        qrCodeMessage => {
 
-            if (
+          if(scannerRunning){
 
-              label.includes(
-                "back"
-              )
+            scannerRunning = false;
 
-              ||
-
-              label.includes(
-                "rear"
-              )
-
-              ||
-
-              label.includes(
-                "後"
-              )
-
-            ) {
-
-              cameraId =
-                camera.id;
-
-            }
+            redeemCoupon(
+              qrCodeMessage
+            );
 
           }
 
-        );
+        }
+
+      );
 
 
-        return html5QrCode
-          .start(
+    })
 
-            cameraId,
-
-            {
-
-              fps:
-                10,
-
-              qrbox:
-
-                {
-
-                  width:
-                    220,
-
-                  height:
-                    220
-
-                }
-
-            },
+    .catch(error => {
 
 
-            qrCodeMessage => {
-
-                if(scannerRunning){
-
-    scannerRunning = false;
-
-    redeemCoupon(
-      qrCodeMessage
-    );
-
-     }
-
-    }
-
-  )
-
- .catch(
-
-  error => {
-
-    scannerRunning = false;
+      scannerRunning = false;
 
 
-    if(html5QrCode){
+      if(html5QrCode){
 
-      try{
+        try{
 
-        html5QrCode.clear();
+          html5QrCode.clear();
+
+        }
+
+        catch(e){}
 
       }
 
-      catch(e){}
 
-    }
+      showRedeemResult(
+        false,
+        "❌ 無法開啟相機：" + error.message
+      );
 
 
-    showRedeemResult(
-      false,
-      "❌ 無法開啟相機：" + error.message
-     );
+    });
+
 
 }
-
-);
       
 /* =========================================================
    停止相機
