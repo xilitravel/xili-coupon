@@ -3612,11 +3612,25 @@ function login(){
 
       }
 
-      else{
+else{
 
-        alert("登入失敗");
+  document
+    .getElementById("loginMessage")
+    .style.display = "block";
 
-      }
+
+  document
+    .getElementById("loginMessage")
+    .className =
+      "result-box error";
+
+
+  document
+    .getElementById("loginMessage")
+    .innerHTML =
+      "❌ 工作人員密碼錯誤，請重新輸入";
+
+}
 
     }
 
